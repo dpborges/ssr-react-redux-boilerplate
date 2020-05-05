@@ -1,0 +1,68 @@
+
+
+
+    Redux Capability            Browser             Server                  Hooks Capability        Browser             Server
+    ======================      ==============      ==============          =================       ===============     ====================
+1   Redux Store                 yes                 yes
+
+2   dispatch (an action)        yes                 yes
+
+3   action creator              yes                 yes
+
+4   Process of dispatch         automatic           NOT automatic
+    action, update store,
+    and render app
+
+4   Redux State Hydration       requires looking    requires serializing
+                                at data serialized  data and setting
+                                from server side    windows variable
+
+5   Provider                    notifies app        notifies app one
+                                anytime redux       time, when page is 
+                                store changes       rendered.
+
+6   Create Store                yes                 yes
+
+7   Action / Action             Yes
+    Creator
+
+8   mapStateToProps - makes     yes                 yes
+    a piece of state in
+    redux store available as 
+    prop. Note this is inside
+    compponent.
+
+9   Reducer - is an             yes                 yes
+    action listener which
+    updates store with
+    action payload
+
+10  'connect' HOC, used to        yes                 yes
+    connect state to props
+    and dispatch to props
+
+
+======================================================================================================
+Questions to ask yourself when going through the Hooks documentation and video.
+
+    How do I create a combined store with Hooks and useState?
+
+    How do I simulate an action / action creator?
+
+    How do I dispatch an action?
+
+    How do I simulate a reducer, that is watching for actions?
+
+    How do I make pieces of state avaiable as props to a given component?
+
+    How do I simulate a Provider that passes down state to my application?
+
+    
+
+
+
+
+
+
+
+

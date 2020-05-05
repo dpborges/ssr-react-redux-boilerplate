@@ -1,0 +1,39 @@
+Client side.
+=============
+
+- Component is mounted on the client side
+- Inside ComponentDidMount we call fetchUsers() function.
+- fetchUsers function will retrieve user list and dispatch an action to update redux store with results
+- When React detects state has changed, the page is re-rendered showing list of users.
+
+
+Server side
+=============
+- Match the url path to a route to figure what component neends to be rendered.
+- Call the loadData() function  attached to each component and wait till data set is returned
+- Detect when all requests are completed (using promise.all)
+- Render app using data that has been populated in redux store
+- Dump the redux state as json data into the HTML template
+- Send result back to browser.
+-----------------------------------------
+- Client bundle.js is sent to the browser
+- Bundle creates its client side redux store (initially empty)
+- Client store is initialized with state that was dumped in the HTML page by passing it to the 
+  second argument of our redux createStore() invocation.
+- Client renders page with with data from client side redux store which was 
+  initialized with server side data.
+
+On server side we DO NO use the connect function of redux because page is only rendered once.
+The connect function is needed on browser side because everytime state changes the component
+dispatches an event via connnect, which is not needed on server side.
+
+Why do we use store.dispatch on server side? Because on server side we do not have the lifeccyle framework 
+we have on client where Provider communicates changes to page and the page connnect function dispatches
+action, the state changes,  and page is re-rendered.  On server side the onus is on us to call
+the dispatch function, so this is why we call it after our API call has completed so we can update
+action to update redux store.
+
+Why are we using redux store at all? Because our loadData functions run in parallel. Only when 
+promise.all is resolved do we have all the data in redux store.
+
+

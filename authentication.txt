@@ -1,0 +1,8 @@
+Note when using google Oauth, you are using cookie based authentication, 
+which is fine when authenticating via a browser using a SPA. If browser
+authenticates directly with the API, users will be able to authenticate.
+
+The question is, how do we make that cookie available to the server, so
+browser thinks cookie came from server.
+
+

@@ -1,0 +1,10 @@
+Read through non coding videos and stop at coding videos and document code base.
+
+ - Next up: Review udemy video Section 6/lesson #31. Integrating Redux
+            Be sure to:
+                - document framework and update the framework mappings 
+                  spreadsheet 
+                - Document test cases, How to execute them.
+
+
+

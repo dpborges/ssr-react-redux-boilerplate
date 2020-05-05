@@ -1,0 +1,12 @@
+API testing 
+
+This the base url for the API: https://react-ssr-api.herokuapp.com
+These are the routes for that API
+  /         API Documentation
+  /users    Return users list
+  /admins   Return list of admins
+  /auth/google starts auth process
+  /current_user return info about current user logged in
+  /logout   Log out of application
+
+  

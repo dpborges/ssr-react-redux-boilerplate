@@ -1,0 +1,21 @@
+
+Data loading on server side
+
+Server side
+=============
+1) - Match the url path to a route to figure what component neends to be rendered.
+2) - Call the loadData() function  attached to each component and wait till data set is returned
+3) - Detect when all requests are completed (using promise.all)
+4) - Render app using data that has been populated in redux store
+5) - Send result back to browser.
+
+
+
+Architectural pattern                           Location
+=============================================   ===========================
+url Matching                                    index.js
+loadData function call                          index.js
+loadData function definition                    component (eg. UsersListPage)
+loadData implementation                         actions/index.js
+redux store update                              reducers/<dataname>Reducer.js                    
+render page                                     index.js
