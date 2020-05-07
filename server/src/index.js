@@ -15,7 +15,7 @@ import createStore from './helpers/createStore';
 
 const app = express();    /* create express app */
 
-// Configure express to use Http Proxy and route /api requests to our api server.
+// Configure express to use Http Proxy and to proxy /api requests to our api server.
 // All client side dispatched API actions should be sent through the proxy.
 app.use(
   '/api',
