@@ -25,7 +25,7 @@ export default (req, store, context) => {
   // Inputs:  Provider/redux store and Routes array; in addition you need to pass the StaticRouter required 'context' prop.
   //          Context prop is used to handle Redirects, or to communicate information to a page before rendering it.
   //          Note, the Provider is what notifies the application anytime the redux store changes. In the case of the,
-  //          server, this only happens one time. After page is loaded on browser, redux behaves as it would normally on browser.. 
+  //          server, this only happens once. After page is loaded on browser, redux behaves as it would normally on browser.. 
   //          that is, re-rendering the app every time redux store changes.
   // Process: When client side bundle and BrowserRouter boot up in the browser, the BrowserRouter will use the url in address bar for routing.
   //          It then matches the route found in Routes array, and renders the page associated with that route.
@@ -50,7 +50,8 @@ export default (req, store, context) => {
   // will provide all meta tags specifed on the rendered page.
   // Lastly, add script to pass data from server side to client as INITIAL_STATE. Use serialize to prevent
   // XSS (cross site scripting) security issues. This converts javascript characters like < > and escapes them
-  // so they are not executed.
+  // so they are not executed. Since what gets sent via window.INITIAL_STATE is a copy of redux store,
+  // the authenticate state will get shipped along with it as well.
 
   return `
     <html>

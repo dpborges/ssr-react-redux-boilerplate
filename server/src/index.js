@@ -15,8 +15,9 @@ import createStore from './helpers/createStore';
 
 const app = express();    /* create express app */
 
-// Configure express to use Http Proxy and to proxy /api requests to our api server.
-// All client side dispatched API actions should be sent through the proxy.
+// Configure express to use Http Proxy. When express sees any route prefixed with /api  from the browser, 
+// it will route it to the proxy. All client side dispatched API actions will be sent through the proxy.
+// Note, when request comes from browser,  the browser automatically sends the cookie.
 app.use(
   '/api',
   proxy('http://react-ssr-api.herokuapp.com', {
@@ -35,6 +36,9 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {          
 
   // Create the store before matching route and loading data for the given page.
+  // Note, create store is responsible for creating our custom axios instance for server side,
+  // therefore we pass in the "req" object so the custom axios instance can pull of the cookie 
+  // from the "req" object and attach it to the axios header.
   const store = createStore(req);
 
   // This block of code uses matchRoutes to return an array of promises (for components) associated 

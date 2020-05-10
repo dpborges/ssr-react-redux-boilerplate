@@ -11,13 +11,15 @@ import axios from 'axios';
 import Routes from './Routes';
 import reducers from './reducers';
 
+// Create a custom axios instance to use on client side. The base url is set to /api
+// so that all client side requests are routed to the server side proxy.
 const axiosInstance = axios.create({
   baseURL: '/api'
 });
 
 
-// Create a redux store with combineReducers. The second parameter is use to define initial state. 
-// In this case, it is whatever is in window.INITIAL_STATE, which is the data that came from server side.
+// Create a redux store with combineReducers. The second parameter is used to define initial state. 
+// In this case, it is what is in window.INITIAL_STATE, which is the data populated from server side.
 const store = createStore(
   reducers,
   window.INITIAL_STATE,

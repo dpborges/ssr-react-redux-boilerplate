@@ -11,7 +11,7 @@ import AdminsListPage from './pages/AdminsListPage';
 // component. As of the base framework, each page exports the 'component' property and the 'loadData'
 // function property used for that component.  Note that the App component is the top level 
 // component and all other components are nested. Since the App component has no path, it will
-// be rendered all the time as the root component. If you look at the React Router Configuration,
+// be rendered all the time as the root component. It is up If you look at the React Router Configuration,
 // you can see how to set up nested routes, using the  Routes array list, as well. 
 // As an Aside, I provided some idea below as how to selectively choose not to render a component 
 // on the server or only the client. For example, certain static blog pages render only on server
@@ -19,9 +19,9 @@ import AdminsListPage from './pages/AdminsListPage';
 // *********************************************************************************************
 
 export default [
-  {
-    ...App,                          /* note that App component takes in a routes prop */
-    routes: [         
+  {                               /* Start of App component definition */
+    ...App,                       /* App component does not have a path, hence it will always be rendered on the screen */
+    routes: [                     /* define array of nested routes below the App component */
       {
         ...HomePage,
         path: '/',
@@ -39,12 +39,12 @@ export default [
         ...NotFoundPage
       }
     ]
-  }
+  }                             /* End of App component definition */
 ];
 
 // *********************************************************************************************
 // Aside: If for some reason you need to exclude a route(s) (which translate to rendering) from 
 // either client or server, I may want to consider adding a property to the routes array, so I 
 // can filter on when rendering the routes. According to the Reactor Router Config documentation, 
-// it does not preclude you from adding you own properties.
+// it does not preclude you from adding your own properties, as needed.
 // *********************************************************************************************

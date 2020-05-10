@@ -37,9 +37,16 @@
     updates store with
     action payload
 
-10  'connect' HOC, used to        yes                 yes
+10  'connect' HOC, used to      yes                 yes
     connect state to props
     and dispatch to props
+
+11  redux thunk being to        yes                 yes
+    accept extra argument
+    as axios instance. 
+    Axios instance is 
+    configured different
+    for server and client.
 
 
 ======================================================================================================
@@ -56,6 +63,9 @@ Questions to ask yourself when going through the Hooks documentation and video.
     How do I make pieces of state avaiable as props to a given component?
 
     How do I simulate a Provider that passes down state to my application?
+
+    How do I configure the analagous component of redux thunk to pass in a custom
+    axios instance depending if calling axios from client or server.
 
     
 

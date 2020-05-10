@@ -25,21 +25,22 @@ Here is the caveat. Once user is authenticated, the next time user makes a serve
 not go through the proxy, but to the server, hence, the server needs to attach the cookie to pass it along to API Server.
 Once the page is loaded on client side, all other API calls will go through proxy.
 
-From what I understand, it boils down to 3 interaction scenarios:
+From what I understand, it essentially boils down to 3 interaction scenarios:
 
 > On the first API call made to authenticate, the api request must go through the Proxy Server. 
 > Every initial server side request (after being authenticated) will bypass proxy, and go through the server. 
         This is because, when you initially render a page on the server, all the data fetching is happening on
-        the server, hence the api call will be initiated from the server itself, bypassing the proxy altogether. 
+        the server side, hence the api call will be initiated from the server itself, bypassing the proxy altogether. 
         Therefore, it’s the server's responsibility to attach the cookie to the API request when firing off 
         server side API calls.
-> Once the page is loaded on the client, all subsequent API calls will go through the proxy server.
+> Once the page is loaded on the client, all subsequent API calls will go through the proxy server and the browser
+        will automatically attach the cookie for each request to originating domain (in our case its the node js web server).
 
 
-NEXT UP: Read documentation on next set of lessons (starting with lesson#59). 
-    - In addtion to documenting what I learn in these lessons in the code base. 
+NEXT UP: Read documentation on next set of lessons (starting with lesson#60). 
+    - Document what I learn in these lessons in the code base. 
     - In addition, I need to answer one question, How do I ensure the first authentication request is 
-      initiated from the browser?  Do you design the login page such there is no server side / API interaction
+      initiated from the browser?  Do you design the login page such that there is no server side / API interaction
       and just defer it to client?
 
       
