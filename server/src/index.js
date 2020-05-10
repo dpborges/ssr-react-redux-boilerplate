@@ -21,13 +21,13 @@ const app = express();    /* create express app */
 app.use(
   '/api',
   proxy('http://react-ssr-api.herokuapp.com', {
-    proxyReqOptDecorator(opts) {
-      opts.headers['x-forwarded-host'] = 'localhost:3000';
-      return opts;
-    }
-  })
-);
-
+    proxyReqOptDecorator(opts) {                              // We are using this options header because we're using the google auth api.
+      opts.headers['x-forwarded-host'] = 'localhost:3000';    // When we make a request to google api it launches the google login page.
+      return opts;                                            // When google login is done,  it needs to know where to redirect the request.
+    }                                                         // This is what the x-forwarded-host header option is for. It tells google,
+  })                                                          // when done, redirect request back to  localhost:3000. If you view the 
+);                                                            // google auth url, you will seee that "destination" set to locahost:3000. 
+                                                              // To review, see end of lesson 71 of the udemy server side course.
 //Lets express know what is public folder 
 app.use(express.static('public'));     
 
@@ -57,17 +57,17 @@ app.get('*', (req, res) => {
     });
 
   Promise.all(promises).then(() => {
-    const context = {};
-    const content = renderer(req, store, context);
+    const context = {};                             /* create empty context to pass to our renderer ... */
+    const content = renderer(req, store, context);  /* which in turn gets passed to the Static Router then down to the page as staticContext */
 
-    if (context.url) {
+    if (context.url) {                             /* Check context for redirect and set response code before sending back content */
       return res.redirect(301, context.url);
     }
-    if (context.notFound) {
+    if (context.notFound) {                        /* Check context for notFound and set response code before sending back content */
       res.status(404);
     }
 
-    res.send(content);
+    res.send(content);                            /* Send back rendered content */
   });
 });
 

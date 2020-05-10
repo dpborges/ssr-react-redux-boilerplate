@@ -21,7 +21,7 @@ import AdminsListPage from './pages/AdminsListPage';
 export default [
   {                               /* Start of App component definition */
     ...App,                       /* App component does not have a path, hence it will always be rendered on the screen */
-    routes: [                     /* define array of nested routes below the App component */
+    routes: [                     /* Here we define an array of nested routes below the App component */
       {
         ...HomePage,
         path: '/',
@@ -36,10 +36,10 @@ export default [
         path: '/users'
       },
       {
-        ...NotFoundPage
+        ...NotFoundPage          /* When you specify a page without a route, it will behave as your default route if route entered is not found */
       }
     ]
-  }                             /* End of App component definition */
+  }                              /* End of App component definition */
 ];
 
 // *********************************************************************************************

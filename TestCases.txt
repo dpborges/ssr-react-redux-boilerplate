@@ -10,3 +10,26 @@ These are the routes for that API
   /logout   Log out of application
 
   
+To see if react ssr is available type in the url for the api https://react-ssr-api.herokuapp.com.
+Once on the page, you will see whether you're logged in or logged out.
+
+If not logged in, log yourself in. You can confirm if logged if page says "You appear to be logged in"
+
+
+
+Scripted Test case 
+======================================================================================
+- Click users link to see if I can see list of users.
+- Click admins link to see if I can see list of admins. Should fail if not logged in.
+- Log in and see that I can login successfully using google auth.
+- Click Admins button to see if I can see admins list
+- Logoff and check that I can no longer see Admins List but able to see users list.
+
+
+
+
+
+
+
+
+
