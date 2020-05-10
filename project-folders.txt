@@ -1,0 +1,16 @@
+Everything in the client folder is effectively shared between the server side and the client side.
+All of the following are shared:
+
+        - actions
+        - components
+        - pages
+        - reducers
+        - App.js
+        - Routes.js
+
+The server side components is the src/index.js file and files in helpers folder:
+
+        - createStorel.js
+        - renderer.js
+
+        
