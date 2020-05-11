@@ -41,9 +41,11 @@ app.get('*', (req, res) => {
   // from the "req" object and attach it to the axios header.
   const store = createStore(req);
 
-  // This block of code uses matchRoutes to return an array of promises (for components) associated 
-  // to the req.path and ensures we load the necessary data (via loadData functions) and populate 
-  // redux store with result set(s) before calling our renderer function
+  // This block of code has 2 map function calls. The first map function call uses matchRoutes to return 
+  // an array of promises with the loadData functions tied to the components associated to the req.path. The 
+  // second map statement wraps each of the promises with another promise to prevent a short circuited promise.all outcome.
+  // This technique guarantees even if one loadData function fails, we'll be able to render the page with the rest of the data
+  // the data that is available.
   const promises = matchRoutes(Routes, req.path)
     .map(({ route }) => {
       return route.loadData ? route.loadData(store) : null;   // exec loadData for given component; return null for routes with no loadData function */
@@ -51,27 +53,31 @@ app.get('*', (req, res) => {
     .map(promise => {                    /* map each promise to another wrapper promise that will force each promise to resolve regardless of whether it */
       if (promise) {                     /* was resolved or rejected. This ensures completion of all promises vs the default  all or nothing approach */                                       
         return new Promise((resolve, reject) => {
-          promise.then(resolve).catch(resolve);
+          promise.then(resolve).catch(resolve);     /* resolve promise whether it succeeded or not */
         });
       }
     });
 
+  // The first line of code in block of code below executes the loadData function(s) as a promise.all, which in turn updates redux store.
+  // After all promises have been resovled, the rest of code block proceeds to render page from redux store and sends back rendered HTML 
+  // to the browser. 
   Promise.all(promises).then(() => {
     const context = {};                             /* create empty context to pass to our renderer ... */
-    const content = renderer(req, store, context);  /* which in turn gets passed to the Static Router then down to the page as staticContext */
+    const content = renderer(req, store, context);  /* ... which in turn gets passed to the Static Router then down to the page as staticContext */
 
     if (context.url) {                             /* Check context for redirect and set response code before sending back content */
-      return res.redirect(301, context.url);
-    }
+      return res.redirect(301, context.url);       /* Note the action, location, and url properties will be set on context whenever */
+    }                                              /* you have a <Redirect> fired on the server side as in the requireAuth HOC component */      
+    
     if (context.notFound) {                        /* Check context for notFound and set response code before sending back content */
       res.status(404);
     }
 
     res.send(content);                            /* Send back rendered content */
   });
-});
+});                                               /* no catch block required because we are ensuring all promises a resolved, and none are rejectec */
 
 /* Tell our express app to listen on port 3000 */
 app.listen(3000, () => {     
   console.log('Listening on port 3000');
-});
+});                                               

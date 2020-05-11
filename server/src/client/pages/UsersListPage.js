@@ -56,9 +56,9 @@ function loadData(store) {
 
 // Note, properties exported here are spread out in Routes.js.  Both the loadData
 // function property and the component property will be available in the route definition.
-// This tells our server (index.js) what load function is associated to this page/component.
-// Note that loadData serves as an abstract interface, as it defines interfacce but gets 
-// to the specifically for each component/page.
+// This tells our server (index.js) what loadData function is associated to this page/component.
+// Note that loadData function serves as an abstract interface, as it defines an interface but gets 
+// implemented differently for each component/page.
 export default {
   loadData,
   component: connect(mapStateToProps, { fetchUsers })(UsersList)

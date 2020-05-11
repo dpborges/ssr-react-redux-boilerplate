@@ -28,9 +28,9 @@ function mapStateToProps({ admins }) {
   return { admins };
 }
 
+
+// Note, what ever props we get back from the connect HOC will get passed to the requireAuth HOC
 export default {
-  component: connect(mapStateToProps, { fetchAdmins })(
-    requireAuth(AdminsListPage)
-  ),
+  component: connect(mapStateToProps, { fetchAdmins })(requireAuth(AdminsListPage)),
   loadData: ({ dispatch }) => dispatch(fetchAdmins())
 };

@@ -43,9 +43,14 @@ From what I understand, it essentially boils down to 3 interaction scenarios:
       The Route for Login Button Navlink will point to the authentication route which is prefixed by /api. This will force it 
       to go through the proxy, and hence create a contract between the user's browser and our web server. The auth status
       is saved on the redux store (which is available on both client and server), hence the status will be available on both the 
-      client and the server side of the application
+      client and the server side of the application.
 
-NEXT UP: Read documentation on next set of lessons (starting with lesson#77) to see how to set up private routes. 
+How do you protect a private route?
+      To be able to protect a given page, we use the requireAuth HOC. If a page requires that user be authenticated,
+      then use the requireAuth HOC with your component. By keeping it at the component level your implementation
+      will work at both the client and server side.
+
+
 
 
     
